@@ -1,0 +1,67 @@
+not found
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local GuiLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SCRIPTSROBLOX738833/GUILIbry-/refs/heads/main/GUILIBRY"))()
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local button = GuiLibrary.createButton(ScreenGui, "اضغط هنا", UDim2.new(0, 200, 0, 50), UDim2.new(0.5, -100, 0.5, -25), function()
+    -- البحث عن المجلدات في الـworkspace
+local eggHuntFolders = {"EggHunt_Baby", "EggHunt_Hard", "EggHunt_Easy", "EggHunt_Extreme", "EggHunt_Medium"}
+
+-- دالة للبحث عن المجلدات والانتقال إلى الأماكن
+function findAndGoToEggHuntFolders()
+    -- التكرار على كل الأسماء في المصفوفة
+    for _, folderName in ipairs(eggHuntFolders) do
+        -- البحث عن المجلد في workspace
+        local folder = workspace:FindFirstChild(folderName)
+        
+        if folder then
+            print("تم العثور على المجلد: " .. folderName)
+            -- التكرار على جميع الأجزاء داخل المجلد
+            for _, part in ipairs(folder:GetChildren()) do
+                if part:IsA("BasePart") then
+                    -- الانتقال إلى المكان المحدد
+                    game.Players.LocalPlayer.Character:MoveTo(part.Position)
+                    print("الانتقال إلى " .. part.Name)
+                    wait(1) -- الانتظار قبل الانتقال للمكان التالي
+                end
+            end
+        else
+            print("المجلد " .. folderName .. " غير موجود في الـworkspace.")
+        end
+    end
+end
+
+-- استدعاء الدالة
+findAndGoToEggHuntFolders()
+end)
+
